@@ -7,6 +7,7 @@ go:
 
 os:
   - linux
+  - linux-ppc64le
   - windows
 
 go_import_path: github.com/kubernetes-sigs/cri-tools
@@ -30,16 +31,16 @@ install:
 jobs:
   include:
     - stage: Static check
-      os: linux # Only need to run on Linux
+      os: linux-ppc64le # Only need to run on Linux
       script:
         - make lint
         - make gofmt
     - stage: Build
-      os: linux # Only need to run on Linux
+      os: linux-ppc64le # Only need to run on Linux
       script:
         -  make release
     - stage: Test
-      os: linux
+      os: linux-ppc64le
       script:
         - make
         - travis_wait hack/install-docker.sh
