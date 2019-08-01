@@ -21,7 +21,8 @@ set -o nounset
 set -o pipefail
 
 # Install nsenter
-docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+#docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+apt-get install util-linux
 
 # Start dockershim first
 /usr/local/bin/kubelet --v=3 --logtostderr --experimental-dockershim &
