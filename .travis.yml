@@ -7,6 +7,7 @@ go:
 
 os:
   - linux-ppc64le
+  - linux
 
 go_import_path: github.com/kubernetes-sigs/cri-tools
 
@@ -34,6 +35,12 @@ jobs:
         - make
         - travis_wait bash -x hack/install-docker.sh
         - travis_wait bash -x hack/install-kubelet.sh
+        - sudo env PATH=$PATH GOPATH=$GOPATH bash -x hack/run-critest.sh
+      os: linux
+      script:
+        - make
+        - bash -x hack/install-docker.sh
+        - bash -x hack/install-kubelet.sh
         - sudo env PATH=$PATH GOPATH=$GOPATH bash -x hack/run-critest.sh
 
 stages:
