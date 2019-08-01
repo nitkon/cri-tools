@@ -38,7 +38,7 @@ sudo add-apt-repository \
 sudo apt-get update
 # Docker is downgraded because exec process in 18.x doesn't inherit additional group id from the init process.
 # See more details at https://github.com/moby/moby/issues/38865.
-sudo apt-get -y --allow-downgrades install docker-ce=18.06.3~ce~3-0~ubuntu
+sudo apt-get -y --allow-downgrades install docker-ce=18.06.0~ce~3-0~ubuntu
 
 # Restart docker daemon.
 sudo service docker restart
