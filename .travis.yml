@@ -6,9 +6,7 @@ go:
   - 1.12.x
 
 os:
-  - linux
   - linux-ppc64le
-  - windows
 
 go_import_path: github.com/kubernetes-sigs/cri-tools
 
@@ -30,31 +28,13 @@ install:
 
 jobs:
   include:
-    - stage: Static check
-      os: linux-ppc64le # Only need to run on Linux
-      script:
-        - make lint
-        - make gofmt
-    - stage: Build
-      os: linux-ppc64le # Only need to run on Linux
-      script:
-        -  make release
     - stage: Test
       os: linux-ppc64le
       script:
         - make
-        - travis_wait hack/install-docker.sh
-        - travis_wait hack/install-kubelet.sh
-        - sudo env PATH=$PATH GOPATH=$GOPATH hack/run-critest.sh
-    - stage: Test
-      os: windows
-      script:
-        - make windows
-        - powershell -c "Set-ExecutionPolicy Bypass -Scope CURRENTUSER -Force"
-        - travis_wait powershell hack/install-kubelet.ps1
-        # Skip hack/run-critest.sh temporarily.
+        - travis_wait bash -x hack/install-docker.sh
+        - travis_wait bash -x hack/install-kubelet.sh
+        - sudo env PATH=$PATH GOPATH=$GOPATH bash -x hack/run-critest.sh
 
 stages:
-  - Static check
-  - Build
   - Test

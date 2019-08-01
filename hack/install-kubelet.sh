@@ -23,7 +23,7 @@ git clone https://github.com/kubernetes/kubernetes $GOPATH/src/k8s.io/kubernetes
 cd $GOPATH/src/k8s.io/kubernetes
 if [ ${TRAVIS_BRANCH:-"master"} != "master" ]; then
   # We can do this because cri-tools have the same branch name with kubernetes.
-  git checkout "${TRAVIS_BRANCH}"
+  git checkout master
 fi
 make WHAT='cmd/kubelet'
 sudo cp _output/bin/kubelet /usr/local/bin
